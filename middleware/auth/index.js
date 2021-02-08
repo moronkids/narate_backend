@@ -28,11 +28,12 @@ passport.use(
           message: "User is not found!",
         });
       }
+      console.log(password, userLogin.password);
+      const validate = await bcrypt.compare(password, userLogin.password);
 
       // if user found and validate the password of user
-      console.log(password, userLogin.password);
       // const validate = await bcrypt.compare(password, userLogin.password);
-      const validate = password === userLogin.password
+      // const validate = password === userLogin.password
 
       // if wrong password
       if (!validate) {

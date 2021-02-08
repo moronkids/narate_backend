@@ -36,7 +36,7 @@ router.post("/login", (req, res, next) => {
     )(req, res, next);
   });
 
-  router.post("/signup", UserController.signup);
+router.post("/signup", UserController.signup);
 // router.post(
 //   "/signin",
 //   [userValidator.login, auth.signin],

@@ -3,6 +3,7 @@ const {
   Model
 } = require('sequelize');
 const { Sequelize } = require('.');
+const bcrypt = require("bcrypt");
 module.exports = (sequelize, DataTypes) => {
   class users extends Model {
     /**
@@ -14,14 +15,22 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  users.init({
-    fullname: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING
-  }, {
-    timestamps: false,
-    sequelize,
-    modelName: 'users',
-  });
+  users.init(
+    {
+      fullname: DataTypes.STRING,
+      email: DataTypes.STRING,
+      password: {
+        type: DataTypes.STRING,
+        set(value) {
+          this.setDataValue("password", bcrypt.hashSync(value, 10));
+        },
+      },
+    },
+    {
+      timestamps: false,
+      sequelize,
+      modelName: "users",
+    }
+  );
   return users;
 };

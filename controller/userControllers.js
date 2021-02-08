@@ -69,7 +69,8 @@ class userController {
     }
     let userData = await users.create({
       email : req.body.email,
-      password : req.body.password
+      password : req.body.password,
+      fullname : req.body.fullname
     })
     const token = jwt.sign(
       {
